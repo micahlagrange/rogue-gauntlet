@@ -10,6 +10,9 @@ radius = 7.0
 script = ExtResource("1_o1uqr")
 
 [node name="Area2D" type="Area2D" parent="."]
+rotation = 2.40927
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_71lsb")
