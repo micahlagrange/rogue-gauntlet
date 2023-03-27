@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs38ngr86l7d5"]
+
+[ext_resource type="Script" path="res://maps/cooldown_buff.gd" id="1_hys7w"]
+
+[sub_resource type="Gradient" id="Gradient_xor34"]
+offsets = PackedFloat32Array(0, 0.445161, 0.612903, 1)
+colors = PackedColorArray(0.12699, 0.395467, 0.920734, 1, 0.63871, 0.63871, 0.63871, 1, 0.858065, 0.858065, 0.858065, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dlqol"]
+gradient = SubResource("Gradient_xor34")
+width = 10
+height = 10
+fill_to = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3jt8"]
+size = Vector2(14, 12)
+
+[node name="CooldownBuff" type="Area2D" groups=["cooldown_buffs"]]
+position = Vector2(54, 69)
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("1_hys7w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_dlqol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d3jt8")

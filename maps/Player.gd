@@ -69,7 +69,8 @@ func cooldown_buff_pickup_got(amount: int):
 		
 	cooldown_buff = amount
 	
-	$ShootTimer.wait_time = DEFAULT_SHOOT_COOLDOWN * (amount / 100.0)
+	var reduction = DEFAULT_SHOOT_COOLDOWN * (amount / 100.0)
+	$ShootTimer.wait_time = DEFAULT_SHOOT_COOLDOWN - reduction
 	
 	$PickupLabel.text = "Projectile Cooldown - %d%%" % amount
 	$PickupLabel.show()
