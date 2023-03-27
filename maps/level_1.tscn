@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3gspymtjgsqb"]
+[gd_scene load_steps=13 format=3 uid="uid://c3gspymtjgsqb"]
 
 [ext_resource type="Texture2D" uid="uid://chfc1g36bhq3m" path="res://atlas/gauntatlas.png" id="1_1x44r"]
 [ext_resource type="Script" path="res://maps/level_1.gd" id="1_w7ebg"]
 [ext_resource type="Script" path="res://maps/Camera2D.gd" id="2_nsiuy"]
-[ext_resource type="Texture2D" uid="uid://qkqvq58ya1h5" path="res://icon.svg" id="3_3e83p"]
-[ext_resource type="Script" path="res://maps/Player.gd" id="3_rme15"]
+[ext_resource type="PackedScene" uid="uid://bx70ek7hvax3d" path="res://player/player.tscn" id="4_ujxwp"]
+[ext_resource type="Script" path="res://maps/cooldown_buff.gd" id="6_31cfa"]
 [ext_resource type="PackedScene" uid="uid://d37vwduxy44w" path="res://spawners/goblin_nest.tscn" id="6_k4uma"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1w0hv"]
@@ -24,8 +24,18 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_1w0hv")
 sources/0 = SubResource("TileSetAtlasSource_hoviv")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i58ub"]
-size = Vector2(12, 12)
+[sub_resource type="Gradient" id="Gradient_xor34"]
+offsets = PackedFloat32Array(0, 0.445161, 0.612903, 1)
+colors = PackedColorArray(0.12699, 0.395467, 0.920734, 1, 0.63871, 0.63871, 0.63871, 1, 0.858065, 0.858065, 0.858065, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dlqol"]
+gradient = SubResource("Gradient_xor34")
+width = 10
+height = 10
+fill_to = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3jt8"]
+size = Vector2(14, 12)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_w7ebg")
@@ -39,22 +49,7 @@ layer_0/tile_data = PackedInt32Array(917528, 0, 0, 983064, 0, 0, 1048600, 0, 0, 
 zoom = Vector2(3, 3)
 script = ExtResource("2_nsiuy")
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(64, 177)
-collision_layer = 256
-collision_mask = 771
-script = ExtResource("3_rme15")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_3e83p")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_i58ub")
-
-[node name="ShootTimer" type="Timer" parent="Player"]
-wait_time = 0.128
-autostart = true
+[node name="Player" parent="." instance=ExtResource("4_ujxwp")]
 
 [node name="GoblinNest" parent="." instance=ExtResource("6_k4uma")]
 position = Vector2(189, 141)
@@ -64,3 +59,17 @@ position = Vector2(298, 269)
 
 [node name="GoblinNest3" parent="." instance=ExtResource("6_k4uma")]
 position = Vector2(165, 334)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+
+[node name="CooldownBuff60" type="Area2D" parent="." groups=["cooldown_buffs"]]
+position = Vector2(54, 69)
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("6_31cfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="CooldownBuff60"]
+texture = SubResource("GradientTexture2D_dlqol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CooldownBuff60"]
+shape = SubResource("RectangleShape2D_d3jt8")

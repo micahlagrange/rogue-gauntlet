@@ -1,7 +1,7 @@
 class_name Projectile
 extends Node2D
 
-var SPEED = 200.0
+var SPEED = 100.0
 var direction: Vector2
 
 func _ready():
@@ -12,5 +12,5 @@ func _physics_process(delta):
 	global_position += direction * SPEED * delta
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	queue_free()

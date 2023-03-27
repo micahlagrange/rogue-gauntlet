@@ -2,6 +2,7 @@ class_name Enemy extends CharacterBody2D
 
 var HEALTH = 1
 var AGGRO_DISTANCE = 200.0
+var dead = false
 
 func _ready() -> void:
 	$HurtBox.area_entered.connect(_on_hurtbox_area_entered)
