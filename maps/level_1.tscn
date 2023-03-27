@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://maps/Camera2D.gd" id="2_nsiuy"]
 [ext_resource type="Texture2D" uid="uid://qkqvq58ya1h5" path="res://icon.svg" id="3_3e83p"]
 [ext_resource type="Script" path="res://maps/Player.gd" id="3_rme15"]
-[ext_resource type="Script" path="res://maps/goblin_nest.gd" id="7_0qpgc"]
+[ext_resource type="PackedScene" uid="uid://d37vwduxy44w" path="res://spawners/goblin_nest.tscn" id="6_k4uma"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1w0hv"]
 
@@ -41,6 +41,8 @@ script = ExtResource("2_nsiuy")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(64, 177)
+collision_layer = 256
+collision_mask = 771
 script = ExtResource("3_rme15")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
@@ -54,19 +56,11 @@ shape = SubResource("RectangleShape2D_i58ub")
 wait_time = 0.128
 autostart = true
 
-[node name="SpawnPoints" type="Node2D" parent="."]
+[node name="GoblinNest" parent="." instance=ExtResource("6_k4uma")]
+position = Vector2(189, 141)
 
-[node name="goblin_nest_1" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(296, 107)
-rotation = -0.0577289
-script = ExtResource("7_0qpgc")
+[node name="GoblinNest2" parent="." instance=ExtResource("6_k4uma")]
+position = Vector2(298, 269)
 
-[node name="SpawnTimer" type="Timer" parent="SpawnPoints/goblin_nest_1"]
-autostart = true
-
-[node name="goblin_nest_2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(164, 34)
-script = ExtResource("7_0qpgc")
-
-[node name="SpawnTimer" type="Timer" parent="SpawnPoints/goblin_nest_2"]
-autostart = true
+[node name="GoblinNest3" parent="." instance=ExtResource("6_k4uma")]
+position = Vector2(165, 334)

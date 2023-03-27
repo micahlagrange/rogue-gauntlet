@@ -1,27 +1,29 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://2h886qx1u0y"]
 
 [ext_resource type="Script" path="res://enemy/Goblin.gd" id="1_hu2tw"]
-[ext_resource type="Texture2D" uid="uid://qkqvq58ya1h5" path="res://icon.svg" id="2_8ve6p"]
+[ext_resource type="Texture2D" uid="uid://c4bibnmkioiib" path="res://enemy/goblin.png" id="2_q3xxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejasy"]
 size = Vector2(12, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_grtn4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gibth"]
 size = Vector2(12, 12)
 
 [node name="Goblin" type="CharacterBody2D"]
+collision_layer = 512
+collision_mask = 769
 script = ExtResource("1_hu2tw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0895214, 0.0895214)
-texture = ExtResource("2_8ve6p")
+scale = Vector2(0.0420143, 0.0264168)
+texture = ExtResource("2_q3xxh")
 
 [node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 1024
+collision_mask = 1024
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_ejasy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_grtn4")
+shape = SubResource("RectangleShape2D_gibth")

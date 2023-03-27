@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dqmwy17u3uabv"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_l0yht"]
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 512
+collision_mask = 769
 script = ExtResource("1_l0yht")

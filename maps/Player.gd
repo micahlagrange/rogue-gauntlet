@@ -45,8 +45,8 @@ func _physics_process(_delta):
 
 func spawn_projectile(direction):
 	var projectile = projectile_scene.instantiate()
+	projectile.add_to_group("projectiles")
 	projectile.global_position = self.global_position
 	projectile.direction = direction
-	projectile.add_to_group("projectiles")
 	add_child(projectile)
 
