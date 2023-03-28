@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3gspymtjgsqb"]
+[gd_scene load_steps=11 format=3 uid="uid://c3gspymtjgsqb"]
 
 [ext_resource type="Texture2D" uid="uid://chfc1g36bhq3m" path="res://atlas/gauntatlas.png" id="1_1x44r"]
 [ext_resource type="Script" path="res://maps/level_1.gd" id="1_w7ebg"]
@@ -9,6 +9,11 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1w0hv"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_awt4g"]
+vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hoviv"]
 texture = ExtResource("1_1x44r")
 0:0/0 = 0
@@ -18,10 +23,12 @@ texture = ExtResource("1_1x44r")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_awt4g")
 
 [sub_resource type="TileSet" id="TileSet_83awf"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_1w0hv")
+navigation_layer_0/layers = 16
 sources/0 = SubResource("TileSetAtlasSource_hoviv")
 
 [node name="Level1" type="Node2D"]
