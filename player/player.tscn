@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx70ek7hvax3d"]
+[gd_scene load_steps=10 format=3 uid="uid://bx70ek7hvax3d"]
 
 [ext_resource type="Script" path="res://maps/Player.gd" id="1_8vs2s"]
 [ext_resource type="Texture2D" uid="uid://qkqvq58ya1h5" path="res://icon.svg" id="2_170pm"]
@@ -54,6 +54,11 @@ scale_min = 0.1
 scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_undcj")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ax5wj"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+
 [node name="Player" type="CharacterBody2D" groups=["players"]]
 position = Vector2(64, 177)
 collision_layer = 256
@@ -63,6 +68,9 @@ script = ExtResource("1_8vs2s")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_170pm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i58ub")
@@ -96,3 +104,6 @@ text = "Cooldown Pickup - 10%"
 
 [node name="Timer" type="Timer" parent="PickupLabel"]
 wait_time = 5.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ax5wj")

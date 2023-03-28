@@ -6,8 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejasy"]
 size = Vector2(12, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gibth"]
-size = Vector2(12, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_h54dr"]
+radius = 5.0
 
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 512
@@ -26,4 +26,6 @@ collision_mask = 1024
 shape = SubResource("RectangleShape2D_ejasy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_gibth")
+shape = SubResource("CircleShape2D_h54dr")
+
+[node name="HuntTimer" type="Timer" parent="."]

@@ -32,3 +32,17 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_snryb")
+
+[node name="SpawnableArea" type="Node2D" parent="."]
+
+[node name="TLCorner" type="Marker2D" parent="SpawnableArea"]
+position = Vector2(-15, -15)
+
+[node name="TRCorner" type="Marker2D" parent="SpawnableArea"]
+position = Vector2(15, -15)
+
+[node name="BLCorner" type="Marker2D" parent="SpawnableArea"]
+position = Vector2(-15, 15)
+
+[node name="BRCorner" type="Marker2D" parent="SpawnableArea"]
+position = Vector2(15, 15)

@@ -14,7 +14,15 @@ const DEFAULT_SHOOT_COOLDOWN = 0.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+@onready var camera = $Camera2D
+
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+
 func _ready() -> void:
+	if not is_multiplayer_authority(): return
+	
+	camera.make_current()
 	can_shoot = true
 	$ShootTimer.timeout.connect(_shoot_cooldown)
 	$PickupLabel/Timer.timeout.connect(_pick_label_timeout)
@@ -22,7 +30,15 @@ func _ready() -> void:
 func _shoot_cooldown():
 	can_shoot = true
 
+
 func _physics_process(_delta):
+	
+	if Input.is_action_pressed("shoot") && can_shoot:
+		spawn_projectile.rpc(facing)
+		can_shoot = false
+
+	if not is_multiplayer_authority(): return
+
 	if Input.get_action_strength("quit"):
 		get_tree().quit()
 	
@@ -43,13 +59,11 @@ func _physics_process(_delta):
 	if direction != Vector2.ZERO:
 		facing = direction.normalized()
 		
-	if Input.is_action_pressed("shoot") && can_shoot:
-		spawn_projectile(facing)
-		can_shoot = false
 
 	velocity = direction.normalized() * SPEED
 	move_and_slide()
 
+@rpc("call_local")
 func spawn_projectile(direction):
 	var projectile = projectile_scene.instantiate()
 	projectile.add_to_group("projectiles")
@@ -58,10 +72,14 @@ func spawn_projectile(direction):
 	projectile.look_at(direction)
 	add_child(projectile)
 
+
 func pickup(item):
+	if not is_multiplayer_authority(): return
+	
 	$AnimationPlayer.play("pickup")
 	if item.is_in_group("cooldown_buffs"):
 		cooldown_buff_pickup_got(item.amount)
+
 
 func cooldown_buff_pickup_got(amount: int):
 	if cooldown_buff > amount:
@@ -75,7 +93,6 @@ func cooldown_buff_pickup_got(amount: int):
 	$PickupLabel.text = "Projectile Cooldown - %d%%" % amount
 	$PickupLabel.show()
 	$PickupLabel/Timer.start()
-
 
 
 func _pick_label_timeout():
