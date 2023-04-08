@@ -30,12 +30,13 @@ layout_mode = 2
 
 [node name="HostButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Host"
+text = "Start"
 
 [node name="_sep2" type="HSeparator" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="JoinBox" type="HBoxContainer" parent="MainMenu/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="AddressEntry" type="LineEdit" parent="MainMenu/MarginContainer/VBoxContainer/JoinBox"]

@@ -27,15 +27,15 @@ func _on_spawn_timer_timeout() -> void:
 func spawn_goblin():
 	if dead:
 		return
-		
-	if len(get_all_gerblins()) >= 9:
+
+	if len(get_all_gerblins()) >= 60:
 		return
 
 	rand.randomize()
 
 	var nextLoc = get_next_spawn_loc()
 	var goblin = goblin_scene.instantiate()
-	
+
 	goblin.add_to_group("enemies")
 	goblin.position = nextLoc
 

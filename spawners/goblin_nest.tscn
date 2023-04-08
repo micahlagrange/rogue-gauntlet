@@ -27,7 +27,6 @@ collision_mask = 1024
 shape = SubResource("RectangleShape2D_ymmxs")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
